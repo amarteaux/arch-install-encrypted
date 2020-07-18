@@ -70,7 +70,7 @@ parted --script "${device}" -- mklabel gpt \
 
 part_boot="$(ls ${device}* | grep -E "^${device}p?1$")"
 part_lvm="$(ls ${device}* | grep -E "^${device}p?2$")"
-root_size="32G"
+root_size="50G"
 home_size="48%FREE"
 
 loadkeys fr
