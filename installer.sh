@@ -68,6 +68,9 @@ parted --script "${device}" -- mklabel gpt \
   set 1 boot on \
   mkpart primary ext4 512MiB 100%
 
+# waiting for partition creation
+sleep 3
+
 part_boot="$(ls ${device}* | grep -E "^${device}p?1$")"
 part_lvm="$(ls ${device}* | grep -E "^${device}p?2$")"
 root_size="50G"
@@ -165,8 +168,7 @@ initrd /initramfs-linux-lts.img
 options rw cryptdevice=UUID=$lvm_uuid:cryptlvm root=/dev/MyVolGroup/root resume=/dev/MyVolGroup/swap
 EOF
 
-arch-chroot /mnt mkinitcpio -p linux
-arch-chroot /mnt mkinitcpio -p linux-lts
+arch-chroot /mnt mkinitcpio -P
 
 arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,uucp,video,audio,storage,games,input "$user"
 arch-chroot /mnt chsh -s /usr/bin/zsh
