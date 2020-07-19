@@ -119,7 +119,8 @@ echo "$hostname" > /mnt/etc/hostname
 
 # timezone
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
-hwclock --systohc
+arch-chroot /mnt timedatectl set-ntp true
+arch-chroot /mnt hwclock --systohc
 
 # set locales
 echo "en_US.UTF-8 UTF-8" >> /mnt/etc/locale.gen
@@ -171,7 +172,6 @@ arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,uucp,video,audio,storage,g
 arch-chroot /mnt chsh -s /usr/bin/zsh
 # enable network manager
 arch-chroot /mnt systemctl enable NetworkManager
-arch-chroot /mnt systemctl start NetworkManager
 
 echo "root:$password" | chpasswd --root /mnt
 echo "$user:$password" | chpasswd --root /mnt
