@@ -16,6 +16,7 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
 MIRRORLIST_URL="https://www.archlinux.org/mirrorlist/?country=GB&protocol=https&use_mirror_status=on"
 
+timedatectl set-ntp true
 pacman -Sy --noconfirm pacman-contrib
 
 echo "Updating mirror list"
