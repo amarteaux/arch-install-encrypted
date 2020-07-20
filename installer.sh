@@ -174,7 +174,7 @@ arch-chroot /mnt mkinitcpio -P
 arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,uucp,video,audio,storage,games,input "$user"
 arch-chroot /mnt chsh -s /usr/bin/zsh
 # enable network manager
-arch-chroot /mnt systemctl enable NetworkManager
+# arch-chroot /mnt systemctl enable NetworkManager
 
 echo "root:$password" | chpasswd --root /mnt
 echo "$user:$password" | chpasswd --root /mnt
